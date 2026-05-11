@@ -1,0 +1,1240 @@
+﻿@page
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Portafolio de Marco Ramirez Zambrano - Ingeniería en Sistemas Computacionales" />
+    <title>Marco Ramirez — ISC Portfolio</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="wwwroot/assets/favicon.ico" />
+    <!-- Font Awesome icons -->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts: Bebas Neue + DM Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet" />
+    <!-- Bootstrap -->
+    <link href="wwwroot/css/styles.css" rel="stylesheet" />
+
+    <style>
+        /* ===== CSS VARIABLES — Paleta Oscura / Rojo ===== */
+        :root {
+            --bg-base: #0e0e0e;
+            --bg-card: #161616;
+            --bg-section: #131313;
+            --accent: #e02020;
+            --accent-hover: #ff3333;
+            --accent-dim: rgba(224, 32, 32, 0.15);
+            --border: rgba(224, 32, 32, 0.25);
+            --text-primary: #f2f2f2;
+            --text-muted: #888888;
+            --text-dim: #555555;
+            --nav-bg: rgba(10, 10, 10, 0.95);
+            --shadow-red: 0 4px 30px rgba(224, 32, 32, 0.2);
+            --font-display: 'Bebas Neue', sans-serif;
+            --font-body: 'DM Sans', sans-serif;
+        }
+
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-base);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px;
+        }
+
+        /* ===== NAVBAR ===== */
+        #mainNav {
+            background: var(--nav-bg) !important;
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+            #mainNav .navbar-brand {
+                font-family: var(--font-display);
+                font-size: 1.6rem;
+                letter-spacing: 2px;
+                color: var(--accent) !important;
+                transition: color 0.2s;
+            }
+
+                #mainNav .navbar-brand:hover {
+                    color: var(--accent-hover) !important;
+                }
+
+            #mainNav .nav-link {
+                font-family: var(--font-body);
+                font-weight: 500;
+                font-size: 0.78rem;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                color: var(--text-primary) !important;
+                padding: 0.5rem 1rem !important;
+                border-radius: 4px;
+                transition: color 0.2s, background 0.2s;
+            }
+
+                #mainNav .nav-link:hover {
+                    color: var(--accent) !important;
+                    background: var(--accent-dim);
+                }
+
+        .navbar-toggler {
+            background: var(--accent) !important;
+            border: none;
+            color: white !important;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            padding: 0.5rem 1rem;
+        }
+
+        /* ===== MASTHEAD / HERO ===== */
+        .masthead {
+            background: var(--bg-base);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 7rem 0 4rem;
+        }
+
+            /* Gradiente diagonal de fondo — sin rejilla */
+            .masthead::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(224,32,32,0.08) 0%, transparent 65%), radial-gradient(ellipse 50% 80% at 0% 100%, rgba(224,32,32,0.05) 0%, transparent 60%);
+                pointer-events: none;
+            }
+
+            /* Línea decorativa lateral izquierda */
+            .masthead::after {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                width: 3px;
+                background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+            }
+
+        .masthead-content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+        }
+
+        /* Layout dos columnas */
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        @@media (max-width: 991px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 3rem;
+            }
+
+            .hero-photo-col {
+                order: -1;
+            }
+
+            .hero-text-col .masthead-subheading {
+                justify-content: center;
+            }
+        }
+
+        /* Foto en contenedor estilizado */
+        .hero-photo-col {
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-photo-frame {
+            position: relative;
+            display: inline-block;
+        }
+
+            /* Anillo rojo giratorio detrás del círculo */
+            .hero-photo-frame::before {
+                content: '';
+                position: absolute;
+                top: -10px;
+                left: -10px;
+                right: -10px;
+                bottom: -10px;
+                border-radius: 50%;
+                border: 2px solid transparent;
+                border-top-color: var(--accent);
+                border-right-color: var(--accent);
+                z-index: 0;
+                animation: spinRing 6s linear infinite;
+            }
+
+            /* Glow rojo difuso detrás */
+            .hero-photo-frame::after {
+                content: '';
+                position: absolute;
+                inset: -20px;
+                border-radius: 50%;
+                background: radial-gradient(circle, rgba(224,32,32,0.18) 0%, transparent 70%);
+                z-index: 0;
+                pointer-events: none;
+            }
+
+        @@keyframes spinRing {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .masthead-avatar {
+            position: relative;
+            z-index: 1;
+            width: 320px;
+            height: 320px;
+            object-fit: cover;
+            object-position: top;
+            border-radius: 50%;
+            display: block;
+            border: 4px solid var(--accent);
+            box-shadow: 0 0 0 8px rgba(224,32,32,0.1), 0 20px 60px rgba(0,0,0,0.6);
+            animation: subtleFloat 5s ease-in-out infinite;
+        }
+
+        @@keyframes subtleFloat {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        @@media (max-width: 768px) {
+            .masthead-avatar {
+                width: 220px;
+                height: 220px;
+            }
+        }
+
+        /* Status dot */
+        .hero-status {
+            position: absolute;
+            bottom: 24px;
+            right: 0;
+            z-index: 2;
+            background: var(--bg-card);
+            border: 1px solid #2a2a2a;
+            border-radius: 50px;
+            padding: 0.4rem 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            white-space: nowrap;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #22c55e;
+            box-shadow: 0 0 8px #22c55e;
+            animation: pulse 2s infinite;
+        }
+
+        @@keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.4;
+            }
+        }
+
+        /* Texto del hero */
+        .masthead-tag {
+            display: inline-block;
+            background: var(--accent-dim);
+            border: 1px solid var(--border);
+            color: var(--accent);
+            font-size: 0.72rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            padding: 0.3rem 1.2rem;
+            border-radius: 50px;
+            margin-bottom: 1.4rem;
+            animation: fadeUp 0.8s ease both;
+        }
+
+        .masthead-heading {
+            font-family: var(--font-display);
+            font-size: clamp(3.2rem, 6vw, 5.5rem);
+            letter-spacing: 3px;
+            color: var(--text-primary);
+            line-height: 1;
+            margin-bottom: 0.6rem;
+            animation: fadeUp 1s ease 0.1s both;
+        }
+
+            .masthead-heading span {
+                color: var(--accent);
+            }
+
+        .masthead-lastname {
+            font-family: var(--font-display);
+            font-size: clamp(3.2rem, 6vw, 5.5rem);
+            letter-spacing: 3px;
+            color: var(--text-dim);
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            animation: fadeUp 1s ease 0.15s both;
+            display: block;
+        }
+
+        .masthead-subheading {
+            font-size: 0.82rem;
+            font-weight: 400;
+            color: var(--text-muted);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            animation: fadeUp 1s ease 0.2s both;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+            .masthead-subheading::before {
+                content: '';
+                display: inline-block;
+                width: 28px;
+                height: 1px;
+                background: var(--accent);
+                flex-shrink: 0;
+            }
+
+        .hero-cta {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            font-weight: 600;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 0.9rem 2.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+            animation: fadeUp 1s ease 0.3s both;
+            box-shadow: var(--shadow-red);
+            margin-right: 1rem;
+        }
+
+            .hero-cta:hover {
+                background: var(--accent-hover);
+                transform: translateY(-2px);
+                box-shadow: 0 8px 40px rgba(224,32,32,0.35);
+                color: white;
+            }
+
+        .hero-cta-ghost {
+            display: inline-block;
+            background: transparent;
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 0.9rem 2rem;
+            border-radius: 6px;
+            border: 1px solid #333;
+            text-decoration: none;
+            transition: border-color 0.2s, color 0.2s, transform 0.2s;
+            animation: fadeUp 1s ease 0.4s both;
+        }
+
+            .hero-cta-ghost:hover {
+                border-color: var(--accent);
+                color: var(--accent);
+                transform: translateY(-2px);
+            }
+
+        @@keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== DIVIDER CUSTOM ===== */
+        .divider-custom {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1.5rem auto 3rem;
+            max-width: 400px;
+        }
+
+        .divider-custom-line {
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .divider-custom-icon {
+            color: var(--accent);
+            font-size: 0.8rem;
+        }
+
+        /* ===== SECTION BASE ===== */
+        .page-section {
+            padding: 6rem 0;
+        }
+
+        .page-section-heading {
+            font-family: var(--font-display);
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            letter-spacing: 4px;
+            color: var(--text-primary);
+            text-align: center;
+        }
+
+        /* ===== PORTFOLIO ===== */
+        #portfolio {
+            background: var(--bg-section);
+        }
+
+        .portfolio-item {
+            position: relative;
+            cursor: pointer;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #222;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+        }
+
+            .portfolio-item:hover {
+                transform: translateY(-6px);
+                box-shadow: var(--shadow-red);
+                border-color: var(--accent);
+            }
+
+            .portfolio-item img {
+                display: block;
+                width: 100%;
+                height: 220px;
+                object-fit: cover;
+                filter: brightness(0.7) grayscale(0.2);
+                transition: filter 0.3s, transform 0.3s;
+            }
+
+            .portfolio-item:hover img {
+                filter: brightness(0.5) grayscale(0);
+                transform: scale(1.05);
+            }
+
+        .portfolio-item-caption {
+            position: absolute;
+            inset: 0;
+            background: rgba(224, 32, 32, 0);
+            transition: background 0.3s;
+            z-index: 1;
+        }
+
+        .portfolio-item:hover .portfolio-item-caption {
+            background: rgba(224, 32, 32, 0.15);
+        }
+
+        .portfolio-item-caption-content {
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .portfolio-item:hover .portfolio-item-caption-content {
+            opacity: 1;
+        }
+
+        .portfolio-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 0.8rem 1rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            z-index: 2;
+        }
+
+            .portfolio-label h6 {
+                font-family: var(--font-display);
+                font-size: 1.1rem;
+                letter-spacing: 2px;
+                color: var(--text-primary);
+                margin: 0;
+            }
+
+            .portfolio-label span {
+                font-size: 0.7rem;
+                color: var(--accent);
+                letter-spacing: 1px;
+                text-transform: uppercase;
+            }
+
+        /* ===== SKILLS BADGES ===== */
+        .badge-tech {
+            display: inline-block;
+            background: var(--accent-dim);
+            border: 1px solid var(--border);
+            color: var(--accent);
+            font-size: 0.68rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            margin: 0.2rem;
+        }
+
+        /* ===== ABOUT ===== */
+        #about {
+            background: var(--bg-base);
+        }
+
+        .about-card {
+            background: var(--bg-card);
+            border: 1px solid #222;
+            border-radius: 10px;
+            padding: 2rem;
+            height: 100%;
+            transition: border-color 0.3s;
+        }
+
+            .about-card:hover {
+                border-color: var(--accent);
+            }
+
+            .about-card h5 {
+                font-family: var(--font-display);
+                font-size: 1.3rem;
+                letter-spacing: 2px;
+                color: var(--accent);
+                margin-bottom: 0.8rem;
+            }
+
+            .about-card p {
+                color: var(--text-muted);
+                font-size: 0.95rem;
+                line-height: 1.8;
+            }
+
+        /* ===== CONTACT ===== */
+        #contact {
+            background: var(--bg-section);
+        }
+
+        .contact-info-card {
+            background: var(--bg-card);
+            border: 1px solid #222;
+            border-radius: 10px;
+            padding: 1.8rem;
+            text-align: center;
+            height: 100%;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+            .contact-info-card:hover {
+                border-color: var(--accent);
+                transform: translateY(-4px);
+            }
+
+            .contact-info-card .icon-wrap {
+                width: 52px;
+                height: 52px;
+                background: var(--accent-dim);
+                border: 1px solid var(--border);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 0 auto 1rem;
+                font-size: 1.2rem;
+                color: var(--accent);
+            }
+
+            .contact-info-card h6 {
+                font-family: var(--font-display);
+                letter-spacing: 2px;
+                font-size: 1rem;
+                color: var(--text-primary);
+                margin-bottom: 0.4rem;
+            }
+
+            .contact-info-card p, .contact-info-card a {
+                color: var(--text-muted);
+                font-size: 0.9rem;
+                text-decoration: none;
+            }
+
+        /* Social buttons */
+        .btn-social {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--border) !important;
+            color: var(--text-muted) !important;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            margin: 0.2rem;
+        }
+
+            .btn-social:hover {
+                background: var(--accent) !important;
+                border-color: var(--accent) !important;
+                color: white !important;
+                transform: translateY(-2px);
+            }
+
+        /* Form */
+        .form-control {
+            background: var(--bg-card) !important;
+            border: 1px solid #2a2a2a !important;
+            color: var(--text-primary) !important;
+            border-radius: 6px;
+            padding: 0.85rem 1rem;
+            font-family: var(--font-body);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+            .form-control:focus {
+                border-color: var(--accent) !important;
+                box-shadow: 0 0 0 3px rgba(224, 32, 32, 0.15) !important;
+                outline: none;
+            }
+
+            .form-control::placeholder {
+                color: var(--text-dim) !important;
+            }
+
+        .form-floating label {
+            color: var(--text-dim) !important;
+            font-size: 0.9rem;
+        }
+
+        .btn-submit {
+            background: var(--accent);
+            border: none;
+            color: white;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 0.85rem 2.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+            box-shadow: var(--shadow-red);
+            width: 100%;
+        }
+
+            .btn-submit:hover {
+                background: var(--accent-hover);
+                transform: translateY(-2px);
+                box-shadow: 0 8px 30px rgba(224,32,32,0.3);
+            }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #080808;
+            border-top: 1px solid #1a1a1a;
+            padding: 3rem 0 1.5rem;
+        }
+
+            footer h4 {
+                font-family: var(--font-display);
+                letter-spacing: 3px;
+                font-size: 1rem;
+                color: var(--accent);
+                margin-bottom: 1rem;
+            }
+
+            footer p, footer a {
+                color: var(--text-muted);
+                font-size: 0.9rem;
+                text-decoration: none;
+            }
+
+        .copyright {
+            background: #050505;
+            padding: 1rem 0;
+            border-top: 1px solid #111;
+        }
+
+            .copyright small {
+                color: var(--text-dim);
+                font-size: 0.78rem;
+                letter-spacing: 1px;
+            }
+
+        /* ===== MODALS ===== */
+        .modal-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+
+        .modal-header {
+            border-bottom: 1px solid #222;
+        }
+
+        .btn-close {
+            filter: invert(1);
+        }
+
+        .portfolio-modal-title {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            letter-spacing: 3px;
+            color: var(--accent) !important;
+        }
+
+        .modal-body p {
+            color: var(--text-muted);
+        }
+
+        .btn-modal-close {
+            background: var(--accent);
+            border: none;
+            color: white;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 0.7rem 2rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+            .btn-modal-close:hover {
+                background: var(--accent-hover);
+            }
+
+        .modal-tech-badge {
+            display: inline-block;
+            background: var(--accent-dim);
+            border: 1px solid var(--border);
+            color: var(--accent);
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 0.2rem 0.7rem;
+            border-radius: 50px;
+            margin: 0.2rem;
+        }
+
+        /* ===== SECTION LABEL ===== */
+        .section-label {
+            display: inline-block;
+            background: var(--accent-dim);
+            border: 1px solid var(--border);
+            color: var(--accent);
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            padding: 0.3rem 1.2rem;
+            border-radius: 50px;
+            margin-bottom: 1rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @@media (max-width: 768px) {
+            .masthead-heading {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+</head>
+<body id="page-top">
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="#page-top">MRZ</a>
+            <button class="navbar-toggler text-uppercase font-weight-bold rounded" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menú <i class="fas fa-bars ms-1"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item mx-0 mx-lg-1">
+                        <a class="nav-link" href="#portfolio">Proyectos</a>
+                    </li>
+                    <li class="nav-item mx-0 mx-lg-1">
+                        <a class="nav-link" href="#about">Sobre mí</a>
+                    </li>
+                    <li class="nav-item mx-0 mx-lg-1">
+                        <a class="nav-link" href="#contact">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== HERO / MASTHEAD ===== -->
+    <header class="masthead" id="page-top">
+        <div class="masthead-content container">
+            <div class="hero-grid">
+                <!-- Columna texto -->
+                <div class="hero-text-col">
+                    <span class="masthead-tag">Portafolio Profesional · 2025</span>
+                    <h1 class="masthead-heading">Marco <span>Ramirez</span></h1>
+                    <span class="masthead-lastname">Zambrano</span>
+                    <p class="masthead-subheading">Ingeniería en Sistemas Computacionales</p>
+                    <div class="mb-4">
+                        <span class="badge-tech">Desarrollo Web</span>
+                        <span class="badge-tech">Apps Móviles</span>
+                        <span class="badge-tech">Bases de Datos</span>
+                        <span class="badge-tech">Redes</span>
+                    </div>
+                    <div>
+                        <a href="#portfolio" class="hero-cta">Ver Proyectos</a>
+                        <a href="#contact" class="hero-cta-ghost">Contacto</a>
+                    </div>
+                </div>
+                <!-- Columna foto -->
+                <div class="hero-photo-col">
+                    <div class="hero-photo-frame">
+                        <img class="masthead-avatar" src="/assets/img/avatar.png" alt="Marco Ramirez Zambrano" />
+                        <div class="hero-status">
+                            <span class="status-dot"></span>
+                            Disponible para proyectos
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== PORTFOLIO ===== -->
+    <section class="page-section" id="portfolio">
+        <div class="container">
+            <div class="text-center mb-2">
+                <span class="section-label">Trabajo Académico</span>
+            </div>
+            <h2 class="page-section-heading">Proyectos</h2>
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-code"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+
+            <div class="row justify-content-center g-4">
+
+                <!-- Proyecto 1 — Web -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="portfolio-item" data-bs-toggle="modal" data-bs-target="#portfolioModal1">
+                        <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                            <div class="portfolio-item-caption-content text-white">
+                                <i class="fas fa-plus fa-2x"></i>
+                            </div>
+                        </div>
+                        <img src="/assets/img/portfolio/cabin.png" alt="Sistema de Inventario" />
+                        <div class="portfolio-label">
+                            <span>Desarrollo Web</span>
+                            <h6>Inventario Online</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proyecto 2 — App Móvil -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="portfolio-item" data-bs-toggle="modal" data-bs-target="#portfolioModal2">
+                        <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                            <div class="portfolio-item-caption-content text-white">
+                                <i class="fas fa-plus fa-2x"></i>
+                            </div>
+                        </div>
+                        <img src="/assets/img/portfolio/cake.png" alt="App Móvil" />
+                        <div class="portfolio-label">
+                            <span>App Móvil</span>
+                            <h6>TaskTrack App</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proyecto 3 — Base de Datos -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="portfolio-item" data-bs-toggle="modal" data-bs-target="#portfolioModal3">
+                        <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                            <div class="portfolio-item-caption-content text-white">
+                                <i class="fas fa-plus fa-2x"></i>
+                            </div>
+                        </div>
+                        <img src="/assets/img/portfolio/game.png" alt="Base de Datos" />
+                        <div class="portfolio-label">
+                            <span>Base de Datos</span>
+                            <h6>BD Hospitalaria</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proyecto 4 — Redes -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="portfolio-item" data-bs-toggle="modal" data-bs-target="#portfolioModal4">
+                        <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                            <div class="portfolio-item-caption-content text-white">
+                                <i class="fas fa-plus fa-2x"></i>
+                            </div>
+                        </div>
+                        <img src="/assets/img/portfolio/safe.png" alt="Redes" />
+                        <div class="portfolio-label">
+                            <span>Redes</span>
+                            <h6>Red Empresarial</h6>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="page-section" id="about">
+        <div class="container">
+            <div class="text-center mb-2">
+                <span class="section-label">Quién soy</span>
+            </div>
+            <h2 class="page-section-heading">Sobre Mí</h2>
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-user"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-6 col-lg-4">
+                    <div class="about-card">
+                        <h5><i class="fas fa-graduation-cap me-2"></i>Formación</h5>
+                        <p>Estudiante de Ingeniería en Sistemas Computacionales con enfoque en desarrollo de software, gestión de bases de datos e infraestructura de redes. Apasionado por construir soluciones tecnológicas que resuelven problemas reales.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="about-card">
+                        <h5><i class="fas fa-laptop-code me-2"></i>Habilidades</h5>
+                        <p>Experiencia en tecnologías como C#, ASP.NET, Python, SQL Server, MySQL, Android Studio y configuración de redes con Cisco Packet Tracer. Me gusta mantenerme actualizado en las últimas tendencias del desarrollo.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="about-card">
+                        <h5><i class="fas fa-bullseye me-2"></i>Objetivo</h5>
+                        <p>Busco oportunidades para aplicar mis conocimientos en proyectos desafiantes, colaborar con equipos multidisciplinarios y contribuir al crecimiento tecnológico de empresas innovadoras en la región y más allá.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section class="page-section" id="contact">
+        <div class="container">
+            <div class="text-center mb-2">
+                <span class="section-label">Hablemos</span>
+            </div>
+            <h2 class="page-section-heading">Contacto</h2>
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-envelope"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+
+            <!-- Info Cards -->
+            <div class="row g-4 mb-5 justify-content-center">
+                <div class="col-sm-6 col-lg-3">
+                    <div class="contact-info-card">
+                        <div class="icon-wrap"><i class="fas fa-map-marker-alt"></i></div>
+                        <h6>Ubicación</h6>
+                        <p>Nogales, Sonora<br>México</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="contact-info-card">
+                        <div class="icon-wrap"><i class="fab fa-github"></i></div>
+                        <h6>GitHub</h6>
+                        <a href="#">github.com/mrz</a>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="contact-info-card">
+                        <div class="icon-wrap"><i class="fab fa-linkedin"></i></div>
+                        <h6>LinkedIn</h6>
+                        <a href="#">Marco Ramirez</a>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="contact-info-card">
+                        <div class="icon-wrap"><i class="fas fa-envelope"></i></div>
+                        <h6>Correo</h6>
+                        <a href="mailto:marco@example.com">marco@example.com</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="name" type="text" placeholder="Tu nombre..." data-sb-validations="required" />
+                            <label for="name">Nombre completo</label>
+                            <div class="invalid-feedback" data-sb-feedback="name:required">El nombre es requerido.</div>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="email" type="email" placeholder="correo@ejemplo.com" data-sb-validations="required,email" />
+                            <label for="email">Correo electrónico</label>
+                            <div class="invalid-feedback" data-sb-feedback="email:required">El correo es requerido.</div>
+                            <div class="invalid-feedback" data-sb-feedback="email:email">Correo no válido.</div>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="phone" type="tel" placeholder="(631) 000-0000" data-sb-validations="required" />
+                            <label for="phone">Teléfono</label>
+                            <div class="invalid-feedback" data-sb-feedback="phone:required">El teléfono es requerido.</div>
+                        </div>
+                        <div class="form-floating mb-4">
+                            <textarea class="form-control" id="message" placeholder="Tu mensaje..." style="height: 10rem" data-sb-validations="required"></textarea>
+                            <label for="message">Mensaje</label>
+                            <div class="invalid-feedback" data-sb-feedback="message:required">El mensaje es requerido.</div>
+                        </div>
+                        <div class="d-none" id="submitSuccessMessage">
+                            <div class="text-center mb-3" style="color: var(--accent);">
+                                <i class="fas fa-check-circle me-2"></i>¡Mensaje enviado correctamente!
+                            </div>
+                        </div>
+                        <div class="d-none" id="submitErrorMessage">
+                            <div class="text-center mb-3" style="color: #ff6b6b;">
+                                <i class="fas fa-times-circle me-2"></i>Error al enviar el mensaje.
+                            </div>
+                        </div>
+                        <button class="btn-submit" id="submitButton" type="submit">
+                            <i class="fas fa-paper-plane me-2"></i>Enviar Mensaje
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="container">
+            <div class="row g-4 text-center text-lg-start">
+                <div class="col-lg-4">
+                    <h4>Ubicación</h4>
+                    <p>Nogales, Sonora<br>México</p>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <h4>Redes Sociales</h4>
+                    <a class="btn-social" href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn-social" href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a class="btn-social" href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a class="btn-social" href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+                <div class="col-lg-4 text-lg-end">
+                    <h4>Sobre el Sitio</h4>
+                    <p>Portafolio académico desarrollado con ASP.NET y Bootstrap como parte de la formación en ISC.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div class="copyright text-center">
+        <div class="container">
+            <small>Copyright &copy; Marco Ramirez Zambrano 2025 — Nogales, Sonora</small>
+        </div>
+    </div>
+
+    <!-- ===== MODALES DE PROYECTOS ===== -->
+    <!-- Modal 1 — Sistema de Inventario Web -->
+    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" aria-labelledby="portfolioModal1Label" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header border-0 pb-0">
+                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body text-center pb-5 px-4">
+                    <h2 class="portfolio-modal-title mb-0">Sistema de Inventario</h2>
+                    <div class="divider-custom">
+                        <div class="divider-custom-line"></div>
+                        <div class="divider-custom-icon"><i class="fas fa-code"></i></div>
+                        <div class="divider-custom-line"></div>
+                    </div>
+                    <img class="img-fluid rounded mb-4" src="/assets/img/portfolio/cabin.png" alt="Sistema de Inventario" style="max-height: 280px; object-fit: cover; width: 100%;" />
+                    <div class="mb-3">
+                        <span class="modal-tech-badge">ASP.NET</span>
+                        <span class="modal-tech-badge">C#</span>
+                        <span class="modal-tech-badge">SQL Server</span>
+                        <span class="modal-tech-badge">Bootstrap</span>
+                    </div>
+                    <p class="mb-4" style="color: var(--text-muted);">Aplicación web para la gestión y control de inventario de una pequeña empresa. Permite registrar productos, proveedores, entradas y salidas de stock, así como generar reportes en tiempo real. Desarrollada con ASP.NET MVC y una base de datos SQL Server.</p>
+                    <button class="btn-modal-close" data-bs-dismiss="modal">
+                        <i class="fas fa-xmark me-2"></i>Cerrar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2 — App Móvil TaskTrack -->
+    <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" aria-labelledby="portfolioModal2Label" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header border-0 pb-0">
+                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body text-center pb-5 px-4">
+                    <h2 class="portfolio-modal-title mb-0">TaskTrack App</h2>
+                    <div class="divider-custom">
+                        <div class="divider-custom-line"></div>
+                        <div class="divider-custom-icon"><i class="fas fa-mobile-alt"></i></div>
+                        <div class="divider-custom-line"></div>
+                    </div>
+                    <img class="img-fluid rounded mb-4" src="/assets/img/portfolio/cake.png" alt="TaskTrack App" style="max-height: 280px; object-fit: cover; width: 100%;" />
+                    <div class="mb-3">
+                        <span class="modal-tech-badge">Android Studio</span>
+                        <span class="modal-tech-badge">Kotlin</span>
+                        <span class="modal-tech-badge">Firebase</span>
+                        <span class="modal-tech-badge">Room DB</span>
+                    </div>
+                    <p class="mb-4" style="color: var(--text-muted);">Aplicación móvil Android para gestión de tareas y proyectos personales. Incluye sistema de categorías, recordatorios con notificaciones push, sincronización con Firebase y modo oscuro. Diseñada siguiendo los principios de Material Design 3.</p>
+                    <button class="btn-modal-close" data-bs-dismiss="modal">
+                        <i class="fas fa-xmark me-2"></i>Cerrar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3 — BD Hospitalaria -->
+    <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" aria-labelledby="portfolioModal3Label" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header border-0 pb-0">
+                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body text-center pb-5 px-4">
+                    <h2 class="portfolio-modal-title mb-0">BD Hospitalaria</h2>
+                    <div class="divider-custom">
+                        <div class="divider-custom-line"></div>
+                        <div class="divider-custom-icon"><i class="fas fa-database"></i></div>
+                        <div class="divider-custom-line"></div>
+                    </div>
+                    <img class="img-fluid rounded mb-4" src="/assets/img/portfolio/game.png" alt="BD Hospitalaria" style="max-height: 280px; object-fit: cover; width: 100%;" />
+                    <div class="mb-3">
+                        <span class="modal-tech-badge">MySQL</span>
+                        <span class="modal-tech-badge">SQL</span>
+                        <span class="modal-tech-badge">Modelado ER</span>
+                        <span class="modal-tech-badge">Normalización</span>
+                    </div>
+                    <p class="mb-4" style="color: var(--text-muted);">Diseño e implementación de una base de datos relacional para la gestión de un hospital. Incluye el modelo entidad-relación, diagrama relacional, normalización hasta 3FN y procedimientos almacenados para consultas de pacientes, médicos, citas y expedientes clínicos.</p>
+                    <button class="btn-modal-close" data-bs-dismiss="modal">
+                        <i class="fas fa-xmark me-2"></i>Cerrar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 4 — Red Empresarial -->
+    <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" aria-labelledby="portfolioModal4Label" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header border-0 pb-0">
+                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body text-center pb-5 px-4">
+                    <h2 class="portfolio-modal-title mb-0">Red Empresarial</h2>
+                    <div class="divider-custom">
+                        <div class="divider-custom-line"></div>
+                        <div class="divider-custom-icon"><i class="fas fa-network-wired"></i></div>
+                        <div class="divider-custom-line"></div>
+                    </div>
+                    <img class="img-fluid rounded mb-4" src="/assets/img/portfolio/safe.png" alt="Red Empresarial" style="max-height: 280px; object-fit: cover; width: 100%;" />
+                    <div class="mb-3">
+                        <span class="modal-tech-badge">Cisco Packet Tracer</span>
+                        <span class="modal-tech-badge">VLAN</span>
+                        <span class="modal-tech-badge">OSPF</span>
+                        <span class="modal-tech-badge">DHCP</span>
+                    </div>
+                    <p class="mb-4" style="color: var(--text-muted);">Diseño y simulación de una red empresarial para una empresa mediana con dos sucursales. Configuración de VLANs por departamento, enrutamiento dinámico con OSPF, servidor DHCP centralizado, ACLs de seguridad y conexión WAN entre sedes, todo simulado en Cisco Packet Tracer.</p>
+                    <button class="btn-modal-close" data-bs-dismiss="modal">
+                        <i class="fas fa-xmark me-2"></i>Cerrar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS -->
+    <script src="wwwroot/js/scripts.js"></script>
+    <!-- SB Forms JS -->
+    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
+</body>
+</html>
